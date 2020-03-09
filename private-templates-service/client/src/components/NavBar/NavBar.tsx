@@ -1,12 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { RootState } from "../../store/rootReducer";
-import SearchBar from "./SearchBar";
-import { Banner, Styledh1, StyledLogo, MobileBanner, StyledButton, Styledh2, StyledButtonContent } from './styled';
-import Logo from '../../assets/adaptive-cards-100-logo.png'
-import { DefaultSerializer } from "v8";
-import { ActionButton } from "office-ui-fabric-react";
 import { useHistory } from "react-router-dom";
+import { ActionButton } from "office-ui-fabric-react";
+
+import { RootState } from "../../store/rootReducer";
+import { toggleEditTemplateNameModal } from '../../store/page/actions';
+
+import SearchBar from "./SearchBar";
+import Logo from '../../assets/adaptive-cards-100-logo.png'
+import { Banner, Styledh1, StyledLogo, MobileBanner, StyledButton, Styledh2, StyledButtonContent, EditIconButton } from './styled';
+
+import { THEME } from '../../globalStyles';
+
 import { Template } from "adaptive-templating-service-typescript-node";
 
 const mapStateToProps = (state: RootState) => {
@@ -17,17 +22,30 @@ const mapStateToProps = (state: RootState) => {
   }
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    toggleEditTemplateNameModal: (isOpen: boolean) => {
+      dispatch(toggleEditTemplateNameModal(isOpen));
+    }
+  }
+}
+
 interface NavBarProps {
   currentPageTitle: string;
   currentPage: string;
   template?: Template;
   version?: string;
+  toggleEditTemplateNameModal: (isOpen: boolean) => void;
 }
 
 
 const NavBar = (props: NavBarProps) => {
 
   let history = useHistory();
+
+  const editTemplateName = () => {
+    props.toggleEditTemplateNameModal(true);
+  }
 
   switch (props.currentPage.toLowerCase()) {
     case "dashboard":
@@ -83,6 +101,7 @@ const NavBar = (props: NavBarProps) => {
           <MobileBanner>
             <StyledLogo src={Logo} />
             <Styledh1>{props.currentPageTitle}</Styledh1>
+            <EditIconButton iconProps={{ iconName: 'Edit' }} theme={THEME.LIGHT} onClick={editTemplateName} />
           </MobileBanner>
         </Banner>
       );
@@ -90,4 +109,4 @@ const NavBar = (props: NavBarProps) => {
 }
 
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

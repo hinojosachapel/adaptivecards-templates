@@ -48,7 +48,7 @@ interface State {
 }
 
 
-class PreviewModal extends React.Component<Props, State> {
+class Preview extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { templateVersion: "1.0" }
@@ -101,4 +101,4 @@ class PreviewModal extends React.Component<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PreviewModal));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Preview));

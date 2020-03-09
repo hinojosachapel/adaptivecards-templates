@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { BREAK, COLORS } from '../../globalStyles';
 
+import { IconButton } from 'office-ui-fabric-react/lib/Button';
+
 export const Banner = styled.div`
   background-color: ${COLORS.BLUE};
   display: flex;
@@ -71,4 +73,13 @@ export const StyledButtonContent = styled.div`
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+`;
+
+export const EditIconButton = styled(IconButton)`
+  margin-left: 16px;
+
+  &:focus {
+    outline: 0px;
+    border: 0px;
+  }
 `;
