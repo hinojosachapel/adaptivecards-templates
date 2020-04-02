@@ -7,8 +7,9 @@ npm install
 npm run build
 npm link
 cd ../../client
-npm link adaptive-templating-service-typescript-node
+rm -rf node_modules/ package-lock.json
 npm install
+npm link adaptive-templating-service-typescript-node
 cd src
 npm link adaptive-templating-service-typescript-node
 cd ../../adaptivecards-templating-service
