@@ -1266,7 +1266,7 @@ export class TemplateServiceClient {
         )
 
         if (!response.success || (response.result && response.result.length === 0)) {
-          const err = new TemplateError(ApiError.DataBindingFailed, "Data binding failed.");
+          const err = new TemplateError(ApiError.DataBindingFailed, response.errorMessage || "Data binding failed.");
           return res.status(400).json({ error: err });
         }
         return res.status(200).json({ templates: response.result });
